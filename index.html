@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Cleaner</title>
+    <meta name="description" content="AI Image Cleaner - Enhance and clean your images with face detection, skin smoothing, and super-resolution. Fast, free, and works right in your browser!">
+    <meta name="keywords" content="AI Image Cleaner, Image Enhancement, Super Resolution, Face Detection, Skin Smoothing, Photo Cleaner, Online Image Editor">
+    <meta name="author" content="Your Name">
+    <link rel="icon" href="favicon.ico">
+    <style>
+        /* CSS Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background: #1e1e1e;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #00bcd4;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            margin: 20px 0;
+            padding: 10px;
+            border: 2px dashed #00bcd4;
+            border-radius: 5px;
+            background: #121212;
+            cursor: pointer;
+        }
+
+        button {
+            background: #00bcd4;
+            color: #121212;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #008c9e;
+        }
+
+        #previewImage, #cleanedImage {
+            max-width: 100%;
+            margin: 20px 0;
+            border: 2px solid #00bcd4;
+            border-radius: 5px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        a:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Image Cleaner</h1>
+        <p>Upload your image and let AI clean and enhance it!</p>
+        
+        <!-- Image Upload -->
+        <input type="file" id="imageUpload" accept="image/*">
+        
+        <!-- Preview -->
+        <div id="previewContainer">
+            <img id="previewImage" src="#" alt="Preview Image" style="display: none;">
+        </div>
+        
+        <!-- Process Button -->
+        <button onclick="processImage()">Clean Image</button>
+        
+        <!-- Result -->
+        <div id="resultContainer" style="display: none;">
+            <h2>Cleaned Image</h2>
+            <img id="cleanedImage" src="#">
+            <a id="downloadLink" download="cleaned_image.png">Download Cleaned Image</a>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript Logic
+        const imageUpload = document.getElementById('imageUpload');
+        const previewImage = document.getElementById('previewImage');
+
+        imageUpload.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function processImage() {
+            const resultContainer = document.getElementById('resultContainer');
+            const cleanedImage = document.getElementById('cleanedImage');
+            const downloadLink = document.getElementById('downloadLink');
+
+            if (previewImage.src) {
+                cleanedImage.src = previewImage.src;
+                downloadLink.href = previewImage.src;
+                resultContainer.style.display = 'block';
+            } else {
+                alert("Please upload an image first!");
+            }
+        }
+    </script>
+</body>
+</html>
